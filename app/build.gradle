@@ -40,4 +40,8 @@ dependencies {
     kapt 'com.tickaroo.tikxml:processor:0.8.13'
     implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
     implementation 'com.tickaroo.tikxml:converter-date-rfc3339:0.8.13'
+    //Room
+    implementation "androidx.room:room-runtime:2.3.0-alpha02"
+    kapt "androidx.room:room-compiler:2.3.0-alpha02"
+    implementation "androidx.room:room-ktx:2.3.0-alpha02"
 }

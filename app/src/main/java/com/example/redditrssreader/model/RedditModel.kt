@@ -1,5 +1,7 @@
 package com.example.redditrssreader.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.tickaroo.tikxml.annotation.Attribute
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
@@ -38,3 +40,15 @@ data class RedditLink(@Attribute val href: String?)
 
 @Xml(name = "media:thumbnail")
 data class RedditThumbnail(@Attribute val url: String?)
+
+@Entity(tableName = "reddit_table")
+data class RedditEntity(
+    @PrimaryKey
+    val id: String,
+    val title: String,
+    val link: String,
+    val author: String,
+    val category: String,
+    val date: String,
+    val pictureUrl: String?
+)
