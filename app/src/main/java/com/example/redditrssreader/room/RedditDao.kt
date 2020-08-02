@@ -1,5 +1,6 @@
 package com.example.redditrssreader.room
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,5 +16,5 @@ interface RedditDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM reddit_table")
-    fun getAll(): List<RedditEntity>
+    fun getAll(): PagingSource<Int, RedditEntity>
 }
