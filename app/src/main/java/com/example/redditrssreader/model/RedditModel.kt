@@ -1,11 +1,13 @@
 package com.example.redditrssreader.model
 
+import androidx.core.text.HtmlCompat
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.tickaroo.tikxml.annotation.Attribute
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
+import java.text.DateFormat
 import java.util.*
 
 @Xml
@@ -52,3 +54,23 @@ data class RedditEntity(
     val date: String,
     val pictureUrl: String?
 )
+
+object ModelConverter {
+    private const val UNKNOWN_VALUE = "unknown"
+
+    private val simpleDateFormat: DateFormat = DateFormat.getDateTimeInstance()
+
+    fun convert(modelList: List<RedditModel>): List<RedditEntity> {
+        return modelList.map { model ->
+            RedditEntity(
+                model.id,
+                HtmlCompat.fromHtml(model.title ?: UNKNOWN_VALUE, HtmlCompat.FROM_HTML_MODE_LEGACY).toString(),
+                model.link?.href ?: UNKNOWN_VALUE,
+                model.author?.name ?: UNKNOWN_VALUE,
+                model.category?.term ?: UNKNOWN_VALUE,
+                if (model.date != null) simpleDateFormat.format(model.date) else "",
+                model.picture?.url
+            )
+        }
+    }
+}
