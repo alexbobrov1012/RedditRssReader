@@ -1,4 +1,4 @@
-package com.example.redditrssreader
+package com.example.redditrssreader.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,28 +6,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.redditrssreader.databinding.ActivityMainBinding
+import com.example.redditrssreader.RssReaderApplication
+import com.example.redditrssreader.databinding.ActivityRedditNewsBinding
 import com.example.redditrssreader.model.RedditEntity
 import com.example.redditrssreader.presenter.RedditPresenter
-import com.example.redditrssreader.view.NewsLoadStateAdapter
-import com.example.redditrssreader.view.NewsView
-import com.example.redditrssreader.view.RedditAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_reddit_news.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NewsView {
+class RedditNewsActivity : AppCompatActivity(), NewsView {
     @Inject
-    lateinit var presenter: RedditPresenter<MainActivity>
+    lateinit var presenter: RedditPresenter<RedditNewsActivity>
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityRedditNewsBinding
     private lateinit var adapter: RedditAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityRedditNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setUpAdapter()
